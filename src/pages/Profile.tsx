@@ -9,7 +9,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { AlertCircle, LogOut } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { getStudentProfile, updateStudentProfile, getProfessorProfile, updateProfessorProfile } from '@/lib/database'
+import { StudentData, ProfessorData } from '@/lib/database'
 
 const Profile = () => {
   const { user, signOut } = useAuth()
@@ -21,7 +21,7 @@ const Profile = () => {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
 
-  const [form, setForm] = useState<any>({})
+  const [form, setForm] = useState<Partial<StudentData & ProfessorData>>({})
 
   useEffect(() => {
     const load = async () => {

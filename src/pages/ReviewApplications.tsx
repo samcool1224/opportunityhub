@@ -7,12 +7,12 @@ import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { AlertCircle, Users, Calendar, MapPin, Clock, DollarSign, Building, Award, CheckCircle, XCircle, Eye, Download, Linkedin, Globe, GraduationCap, BookOpen, Github } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
-import { getAllOpportunities, getProfessorApplications, updateApplicationStatus, createNotification } from '@/lib/database'
+import { getAllOpportunities, getProfessorApplications, updateApplicationStatus, createNotification, OpportunityData, ApplicationData } from '@/lib/database'
 
 const ReviewApplications = () => {
   const { user } = useAuth()
-  const [opportunities, setOpportunities] = useState<any[]>([])
-  const [applications, setApplications] = useState<any[]>([])
+  const [opportunities, setOpportunities] = useState<OpportunityData[]>([])
+  const [applications, setApplications] = useState<ApplicationData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [selectedOpportunity, setSelectedOpportunity] = useState<string | null>(null)
@@ -40,8 +40,8 @@ const ReviewApplications = () => {
         if (professorOpportunities.length > 0) {
           setSelectedOpportunity(professorOpportunities[0].id)
         }
-      } catch (err: any) {
-        setError(err.message || 'Failed to load data')
+      } catch (err) {
+        setError((err as Error).message || 'Failed to load data')
       } finally {
         setLoading(false)
       }

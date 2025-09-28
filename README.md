@@ -1,10 +1,10 @@
-# Syntipy
+# opportunityhub
 
 A modern platform connecting exceptional academic talent with groundbreaking research opportunities.
 
 ## Project Overview
 
-Syntipy revolutionizes how students and professors connect for research opportunities, creating a more efficient and accessible academic ecosystem. The platform features:
+opportunityhub revolutionizes how students and professors connect for research opportunities, creating a more efficient and accessible academic ecosystem. The platform features:
 
 - **Student Registration & Profiles**: Complete profiles with skills, interests, and portfolio uploads
 - **Professor Registration & Approval**: Verified professor accounts with opportunity posting capabilities
@@ -39,7 +39,7 @@ Follow these steps:
 git clone <YOUR_GIT_URL>
 
 # Step 2: Navigate to the project directory.
-cd syntipy
+cd opportunityhub
 
 # Step 3: Install the necessary dependencies.
 npm i

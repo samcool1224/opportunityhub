@@ -4,11 +4,11 @@ import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { EnhancedCard } from '@/components/EnhancedCard'
 import { EnhancedButton } from '@/components/EnhancedButton'
 import { useAuth } from '@/contexts/AuthContext'
-import { getProfessorApplications, updateApplicationStatus, createNotification } from '@/lib/database'
+import { getProfessorApplications, updateApplicationStatus, createNotification, ApplicationData } from '@/lib/database'
 
 const ProfessorApplications = () => {
   const { user } = useAuth()
-  const [applications, setApplications] = useState<any[]>([])
+  const [applications, setApplications] = useState<ApplicationData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 

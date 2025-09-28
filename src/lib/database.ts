@@ -79,7 +79,7 @@ export const uploadFile = async (file: File, userId: string, folder: string): Pr
 }
 
 // Student database operations
-export const createStudentProfile = async (studentData: Omit<StudentData, 'id'>, userId: string): Promise<{ error: any }> => {
+export const createStudentProfile = async (studentData: Omit<StudentData, 'id'>, userId: string): Promise<{ error: Error | null }> => {
   try {
     const { error } = await supabase
       .from('students')
@@ -94,7 +94,7 @@ export const createStudentProfile = async (studentData: Omit<StudentData, 'id'>,
   }
 }
 
-export const updateStudentProfile = async (studentData: Partial<StudentData>, userId: string): Promise<{ error: any }> => {
+export const updateStudentProfile = async (studentData: Partial<StudentData>, userId: string): Promise<{ error: Error | null }> => {
   try {
     const { error } = await supabase
       .from('students')
@@ -107,7 +107,7 @@ export const updateStudentProfile = async (studentData: Partial<StudentData>, us
   }
 }
 
-export const getStudentProfile = async (userId: string): Promise<{ data: StudentData | null; error: any }> => {
+export const getStudentProfile = async (userId: string): Promise<{ data: StudentData | null; error: Error | null }> => {
   try {
     const { data, error } = await supabase
       .from('students')
@@ -122,7 +122,7 @@ export const getStudentProfile = async (userId: string): Promise<{ data: Student
 }
 
 // Professor database operations
-export const createProfessorProfile = async (professorData: Omit<ProfessorData, 'id'>, userId: string): Promise<{ error: any }> => {
+export const createProfessorProfile = async (professorData: Omit<ProfessorData, 'id'>, userId: string): Promise<{ error: Error | null }> => {
   try {
     const { error } = await supabase
       .from('professors')
@@ -138,7 +138,7 @@ export const createProfessorProfile = async (professorData: Omit<ProfessorData, 
   }
 }
 
-export const updateProfessorProfile = async (professorData: Partial<ProfessorData>, userId: string): Promise<{ error: any }> => {
+export const updateProfessorProfile = async (professorData: Partial<ProfessorData>, userId: string): Promise<{ error: Error | null }> => {
   try {
     const { error } = await supabase
       .from('professors')
@@ -151,7 +151,7 @@ export const updateProfessorProfile = async (professorData: Partial<ProfessorDat
   }
 }
 
-export const getProfessorProfile = async (userId: string): Promise<{ data: ProfessorData | null; error: any }> => {
+export const getProfessorProfile = async (userId: string): Promise<{ data: ProfessorData | null; error: Error | null }> => {
   try {
     const { data, error } = await supabase
       .from('professors')
@@ -166,7 +166,7 @@ export const getProfessorProfile = async (userId: string): Promise<{ data: Profe
 }
 
 // Get all professors (for students to browse)
-export const getAllProfessors = async (): Promise<{ data: ProfessorData[] | null; error: any }> => {
+export const getAllProfessors = async (): Promise<{ data: ProfessorData[] | null; error: Error | null }> => {
   try {
     const { data, error } = await supabase
       .from('professors')
@@ -180,7 +180,7 @@ export const getAllProfessors = async (): Promise<{ data: ProfessorData[] | null
 }
 
 // Get all students (for professors to browse)
-export const getAllStudents = async (): Promise<{ data: StudentData[] | null; error: any }> => {
+export const getAllStudents = async (): Promise<{ data: StudentData[] | null; error: Error | null }> => {
   try {
     const { data, error } = await supabase
       .from('students')
@@ -396,7 +396,7 @@ export const getDailyApplicationCount = async (studentId: string) => {
   }
 }
 
-export const getProfessorApplications = async (professorId: string): Promise<{ data: any[] | null; error: any }> => {
+export const getProfessorApplications = async (professorId: string): Promise<{ data: ApplicationData[] | null; error: Error | null }> => {
   try {
     const { data, error } = await supabase
       .from('applications')
@@ -413,7 +413,7 @@ export const getProfessorApplications = async (professorId: string): Promise<{ d
   }
 }
 
-export const updateApplicationStatus = async (applicationId: string, status: 'under_review' | 'accepted' | 'rejected'): Promise<{ error: any }> => {
+export const updateApplicationStatus = async (applicationId: string, status: 'under_review' | 'accepted' | 'rejected'): Promise<{ error: Error | null }> => {
   try {
     const { error } = await supabase
       .from('applications')
@@ -436,7 +436,7 @@ export interface NotificationData {
   created_at?: string
 }
 
-export const createNotification = async (notification: NotificationData): Promise<{ error: any }> => {
+export const createNotification = async (notification: NotificationData): Promise<{ error: Error | null }> => {
   try {
     const { error } = await supabase
       .from('notifications')
@@ -452,7 +452,7 @@ export const createNotification = async (notification: NotificationData): Promis
   }
 }
 
-export const getNotifications = async (userId: string): Promise<{ data: NotificationData[] | null; error: any }> => {
+export const getNotifications = async (userId: string): Promise<{ data: NotificationData[] | null; error: Error | null }> => {
   try {
     const { data, error } = await supabase
       .from('notifications')
@@ -465,7 +465,7 @@ export const getNotifications = async (userId: string): Promise<{ data: Notifica
   }
 }
 
-export const markNotificationRead = async (id: string): Promise<{ error: any }> => {
+export const markNotificationRead = async (id: string): Promise<{ error: Error | null }> => {
   try {
     const { error } = await supabase
       .from('notifications')

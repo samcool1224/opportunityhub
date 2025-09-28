@@ -30,9 +30,17 @@ interface NavigationProps {
   } | null;
 }
 
+interface Notification {
+  id: string;
+  title: string;
+  body: string;
+  created_at: string;
+  read_at: string | null;
+}
+
 export const Navigation = ({ user: propUser }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [notifications, setNotifications] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false);
   const [isHeroVisible, setIsHeroVisible] = useState(true);
@@ -102,7 +110,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
         const { data } = await getNotifications(authUser.id);
         if (data) {
           setNotifications(data);
-          setUnreadCount(data.filter((n: any) => !n.read_at).length);
+          setUnreadCount(data.filter((n: Notification) => !n.read_at).length);
         }
       } catch (error) {
         console.error('Failed to load notifications:', error);

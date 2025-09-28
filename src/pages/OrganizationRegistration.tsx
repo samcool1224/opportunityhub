@@ -300,7 +300,7 @@ const OrganizationRegistration = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="orgType">Organization Type</Label>
-                      <select className="input-enhanced w-full" value={formData.orgType} onChange={(e) => setFormData(prev => ({...prev, orgType: e.target.value as any}))}>
+                      <select className="input-enhanced w-full" value={formData.orgType} onChange={(e) => setFormData(prev => ({...prev, orgType: e.target.value as 'Company' | 'Nonprofit' | 'Startup' | 'School' | ''}))}>
                         <option value="">Select type</option>
                         <option value="Company">Company</option>
                         <option value="Startup">Startup</option>
@@ -378,7 +378,7 @@ const OrganizationRegistration = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="orgSize">Organization Size</Label>
-                    <select className="input-enhanced w-full" value={formData.orgSize} onChange={(e) => setFormData(prev => ({...prev, orgSize: e.target.value as any}))}>
+                    <select className="input-enhanced w-full" value={formData.orgSize} onChange={(e) => setFormData(prev => ({...prev, orgSize: e.target.value as '1-10' | '11-50' | '51-200' | '201-500' | '500+' | ''}))}>
                       <option value="">Select size</option>
                       <option value="1-10">1-10</option>
                       <option value="11-50">11-50</option>
@@ -389,7 +389,7 @@ const OrganizationRegistration = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="remotePolicy">Remote Policy</Label>
-                    <select className="input-enhanced w-full" value={formData.remotePolicy} onChange={(e) => setFormData(prev => ({...prev, remotePolicy: e.target.value as any}))}>
+                    <select className="input-enhanced w-full" value={formData.remotePolicy} onChange={(e) => setFormData(prev => ({...prev, remotePolicy: e.target.value as 'Remote' | 'Hybrid' | 'On-site' | ''}))}>
                       <option value="">Select policy</option>
                       <option value="Remote">Remote</option>
                       <option value="Hybrid">Hybrid</option>
@@ -405,7 +405,7 @@ const OrganizationRegistration = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="postingIntent">Opportunity Types You Plan to Post</Label>
-                  <select className="input-enhanced w-full" value={formData.postingIntent} onChange={(e) => setFormData(prev => ({...prev, postingIntent: e.target.value as any}))}>
+                  <select className="input-enhanced w-full" value={formData.postingIntent} onChange={(e) => setFormData(prev => ({...prev, postingIntent: e.target.value as 'Internships' | 'Competitions' | 'Workshops' | 'Volunteering' | 'Events' | 'Multiple' | ''}))}>
                     <option value="">Select an option</option>
                     <option value="Internships">Internships</option>
                     <option value="Competitions">Competitions</option>

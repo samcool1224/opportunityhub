@@ -13,8 +13,8 @@ export const HeroSection = () => {
         <div className="glass-orb glass-panel-golden w-72 h-72 bottom-1/4 left-1/3 float-fast" style={{animationDelay: '4s'}} />
         <div className="glass-orb glass-panel-emerald w-64 h-64 top-1/2 right-1/6 float-slow" style={{animationDelay: '6s'}} />
         
-        <div className="glass-geometric glass-panel-royal w-64 h-48 top-1/6 right-1/3 rotate-slow" style={{'--rotation': '15deg'} as any} />
-        <div className="glass-geometric glass-panel-purple w-56 h-40 bottom-1/3 left-1/4 rotate-medium" style={{'--rotation': '-12deg'} as any} />
+        <div className="glass-geometric glass-panel-royal w-64 h-48 top-1/6 right-1/3 rotate-slow" style={{'--rotation': '15deg'} as React.CSSProperties} />
+        <div className="glass-geometric glass-panel-purple w-56 h-40 bottom-1/3 left-1/4 rotate-medium" style={{'--rotation': '-12deg'} as React.CSSProperties} />
       </div>
 
       {/* Main Hero Content */}

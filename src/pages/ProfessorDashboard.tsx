@@ -28,18 +28,18 @@ import {
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserProfile } from '@/hooks/useUserProfile';
-import { getAllOpportunities, getProfessorApplications, ProfessorData } from '@/lib/database';
+import { getAllOpportunities, getProfessorApplications, ProfessorData, OpportunityData, ApplicationData } from '@/lib/database';
 
 const ProfessorDashboard = () => {
   const { user } = useAuth();
   const { profile, loading: profileLoading, error: profileError } = useUserProfile();
-  const [opportunities, setOpportunities] = useState<any[]>([]);
-  const [applications, setApplications] = useState<any[]>([]);
+  const [opportunities, setOpportunities] = useState<OpportunityData[]>([]);
+  const [applications, setApplications] = useState<ApplicationData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   // Type guard to ensure profile is ProfessorData
-  const isProfessorProfile = (profile: any): profile is ProfessorData => {
+  const isProfessorProfile = (profile: ProfessorData | null): profile is ProfessorData => {
     return profile && 'institution' in profile;
   };
 
@@ -65,8 +65,8 @@ const ProfessorDashboard = () => {
         const professorOpportunities = oppsResult.data?.filter(opp => opp.professor_id === user.id) || [];
         setOpportunities(professorOpportunities);
         setApplications(appsResult.data || []);
-      } catch (err: any) {
-        setError(err.message || 'Failed to load dashboard data');
+      } catch (err) {
+        setError((err as Error).message || 'Failed to load dashboard data');
       } finally {
         setLoading(false);
       }

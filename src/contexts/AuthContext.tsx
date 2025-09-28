@@ -6,8 +6,8 @@ interface AuthContextType {
   user: User | null
   session: Session | null
   loading: boolean
-  signUp: (email: string, password: string, role: 'student' | 'professor', name?: string) => Promise<{ data: any; error: any }>
-  signIn: (email: string, password: string) => Promise<{ error: any }>
+  signUp: (email: string, password: string, role: 'student' | 'professor', name?: string) => Promise<{ data: { user: User; session: Session } | { user: null; session: null }; error: Error | null }>
+  signIn: (email: string, password: string) => Promise<{ error: Error | null }>
   signOut: () => Promise<void>
 }
 
@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
   }, []);
 
-  const signUp = async (email: string, password: string, role: 'student' | 'professor', name?: string) => {
+  const signUp = async (email: string, password: string, role: 'student' | 'professor', name?: string): Promise<{ data: { user: User; session: Session } | { user: null; session: null }; error: Error | null }> => {
     try {
       console.log('Attempting signup for:', email, 'with role:', role)
       

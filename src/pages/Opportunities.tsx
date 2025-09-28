@@ -27,10 +27,12 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
 
+import { OpportunityData, ApplicationData } from '@/lib/database';
+
 const Opportunities = () => {
   const { user: authUser } = useAuth();
   const [loading, setLoading] = useState(true);
-  const [opportunities, setOpportunities] = useState<any[]>([]);
+  const [opportunities, setOpportunities] = useState<OpportunityData[]>([]);
   const [error, setError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [newOpp, setNewOpp] = useState({
@@ -40,13 +42,13 @@ const Opportunities = () => {
     location: '',
     duration: '',
     compensation: '',
-    type: 'Remote' as any,
+    type: 'Remote' as 'Remote' | 'On-site' | 'Hybrid',
     application_deadline: '',
     applicant_cap: '',
     opportunity_link: '',
     app_link: ''
   });
-  const [applications, setApplications] = useState<any[]>([]);
+  const [applications, setApplications] = useState<ApplicationData[]>([]);
   const [dailyApplicationCount, setDailyApplicationCount] = useState(0);
   const [visibleOpportunities, setVisibleOpportunities] = useState(5);
   const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: string]: boolean }>({});
@@ -95,8 +97,8 @@ const Opportunities = () => {
           const { count } = await getDailyApplicationCount(authUser.id);
           setDailyApplicationCount(count);
         }
-      } catch (err: any) {
-        setError(err.message || 'Failed to load data');
+      } catch (err) {
+        setError((err as Error).message || 'Failed to load data');
       } finally {
         setLoading(false);
       }
@@ -134,12 +136,12 @@ const Opportunities = () => {
         // Show success message
         alert('Application submitted successfully!');
       }
-    } catch (err: any) {
-      setError(err.message || 'Failed to apply');
+    } catch (err) {
+      setError((err as Error).message || 'Failed to apply');
     }
   };
 
-  const isCapReached = (opportunity: any) => {
+  const isCapReached = (opportunity: OpportunityData) => {
     if (!opportunity.cap_reached_at) return false;
     
     const capReachedDate = new Date(opportunity.cap_reached_date);
@@ -154,7 +156,7 @@ const Opportunities = () => {
     return applications.some(app => app.opportunity_id === opportunityId);
   };
 
-  const getApplicationStatus = (opportunity: any) => {
+  const getApplicationStatus = (opportunity: OpportunityData) => {
     if (opportunity.cap_reached_at && isCapReached(opportunity)) {
       return 'cap_reached';
     }
@@ -192,9 +194,9 @@ const Opportunities = () => {
             <div className="glass-wave glass-panel-emerald w-80 h-16 bottom-1/3 right-1/4 parallax-medium" style={{animationDelay: '2s'}} />
             
             {/* Geometric Glass Panels */}
-            <div className="glass-geometric glass-panel-orange w-56 h-40 top-1/6 right-1/4 rotate-slow" style={{'--rotation': '12deg'} as any} />
-            <div className="glass-geometric glass-panel-coral w-48 h-32 bottom-1/3 left-1/6 rotate-medium" style={{'--rotation': '-8deg'} as any} />
-            <div className="glass-geometric glass-panel-purple w-40 h-28 top-2/3 right-1/8 rotate-slow" style={{'--rotation': '15deg'} as any} />
+            <div className="glass-geometric glass-panel-orange w-56 h-40 top-1/6 right-1/4 rotate-slow" style={{'--rotation': '12deg'} as React.CSSProperties} />
+            <div className="glass-geometric glass-panel-coral w-48 h-32 bottom-1/3 left-1/6 rotate-medium" style={{'--rotation': '-8deg'} as React.CSSProperties} />
+            <div className="glass-geometric glass-panel-purple w-40 h-28 top-2/3 right-1/8 rotate-slow" style={{'--rotation': '15deg'} as React.CSSProperties} />
             
             {/* Additional Floating Elements */}
             <div className="glass-orb glass-panel-magenta w-32 h-32 top-1/2 left-1/2 breathe" style={{animationDelay: '1s'}} />
@@ -354,7 +356,7 @@ const Opportunities = () => {
                         location: newOpp.location,
                         duration: newOpp.duration,
                         compensation: newOpp.compensation,
-                        type: newOpp.type as any,
+                        type: newOpp.type,
                         application_deadline: newOpp.application_deadline || undefined,
                         applicants: 0,
                         applicant_cap: newOpp.applicant_cap ? parseInt(newOpp.applicant_cap, 10) : 0,

@@ -7,7 +7,7 @@ interface EnhancedButtonProps {
   variant?: 'hero' | 'outline-hero' | 'glass' | 'gradient';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
-  onClick?: (event?: any) => void;
+  onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
 }

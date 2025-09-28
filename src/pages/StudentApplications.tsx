@@ -6,11 +6,11 @@ import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { AlertCircle, Calendar, MapPin, Clock, DollarSign, Building, Award, CheckCircle, XCircle, Clock as ClockIcon } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
-import { getStudentApplications } from '@/lib/database'
+import { getStudentApplications, ApplicationData } from '@/lib/database'
 
 const StudentApplications = () => {
   const { user } = useAuth()
-  const [applications, setApplications] = useState<any[]>([])
+  const [applications, setApplications] = useState<ApplicationData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
