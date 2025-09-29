@@ -70,7 +70,7 @@ const Login = () => {
               <h1 className="text-3xl font-bold mb-2">
                 <span className="bg-gradient-hero bg-clip-text text-transparent">Welcome Back</span>
               </h1>
-              <p className="text-muted-foreground">Sign in to your opportunityhub account</p>
+              <p className="text-muted-foreground">Sign in to your FutureForge account</p>
             </div>
 
             {redirectMessage && (

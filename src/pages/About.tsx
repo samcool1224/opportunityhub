@@ -67,7 +67,7 @@ const About = () => {
             <div className="text-center max-w-4xl mx-auto pt-32">
             <h1 className="text-6xl sm:text-7xl font-bold mb-12 hero-text-shadow">
               <span className="text-foreground">About</span>{' '}
-              <span className="bg-gradient-hero bg-clip-text text-transparent hero-glow">opportunityhub</span>
+              <span className="bg-gradient-hero bg-clip-text text-transparent hero-glow">FutureForge</span>
             </h1>
             <p className="text-2xl sm:text-3xl text-muted-foreground leading-relaxed mb-16 hero-text-shadow">
               We're revolutionizing how students and professors connect for research opportunities, 
@@ -96,7 +96,7 @@ const About = () => {
               </h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  opportunityhub was born from a simple observation: exceptional students and innovative professors 
+                  FutureForge was born from a simple observation: exceptional students and innovative professors 
                   often struggled to find each other. Traditional academic networks were fragmented, 
                   inefficient, and often excluded promising talent.
                 </p>
@@ -155,7 +155,7 @@ const About = () => {
               <span className="bg-gradient-hero bg-clip-text text-transparent">Values</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The principles that guide everything we do at opportunityhub.
+              The principles that guide everything we do at FutureForge.
             </p>
           </div>
 

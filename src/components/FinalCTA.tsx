@@ -19,8 +19,8 @@ export const FinalCTA = () => {
             <span className="bg-gradient-hero bg-clip-text text-transparent">Opportunities</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
-            A centralized hub for high school and undergraduate students — mixing ≈60% curated listings
-            and ≈40% direct postings. Every opportunity is reviewed for legitimacy and student suitability.
+            A centralized hub for high school and undergraduate students — mixing curated listings
+            and direct postings. Every opportunity is reviewed for legitimacy and student suitability.
           </p>
         </div>
 

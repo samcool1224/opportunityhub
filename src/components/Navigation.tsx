@@ -165,7 +165,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                   : 'bg-gradient-hero bg-clip-text text-transparent'
               }`}
             >
-              OpportunityHub
+              FutureForge
             </Link>
 
             {/* Desktop Navigation */}
@@ -283,7 +283,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                 : 'bg-gradient-hero bg-clip-text text-transparent'
             }`}
           >
-            OpportunityHub
+            FutureForge
           </Link>
 
           {/* Desktop Navigation */}

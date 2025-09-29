@@ -13,21 +13,21 @@ export const SocialProof = () => {
 
   const testimonials = [
     {
-      quote: "OpportunityHub helped me land an amazing internship at a tech startup. I never would have found this opportunity otherwise!",
+      quote: "FutureForge helped me land an amazing internship at a tech startup. I never would have found this opportunity otherwise!",
       author: "Jamie L.",
       role: "Undergraduate Student, Computer Science",
       avatar: "/test1.png",
       rating: 5
     },
     {
-      quote: "As a nonprofit organization, we've found incredible student volunteers through OpportunityHub. The platform makes it easy to connect with passionate young talent.",
+      quote: "As a nonprofit organization, we've found incredible student volunteers through FutureForge. The platform makes it easy to connect with passionate young talent.",
       author: "Maria G.",
       role: "Program Director, Education Nonprofit",
       avatar: "/test2.png",
       rating: 5
     },
     {
-      quote: "I discovered a national business competition through OpportunityHub that ended up being a turning point in my entrepreneurial journey. The platform is a game-changer for students.",
+      quote: "I discovered a national business competition through FutureForge that ended up being a turning point in my entrepreneurial journey. The platform is a game-changer for students.",
       author: "David T.",
       role: "High School Senior",
       avatar: "/test3.png",
@@ -80,7 +80,7 @@ export const SocialProof = () => {
             Verified Impact from Our Community
           </h3>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Stories from students and organizations who discovered trusted opportunities on OpportunityHub
+            Stories from students and organizations who discovered trusted opportunities on FutureForge
           </p>
         </div>
 
