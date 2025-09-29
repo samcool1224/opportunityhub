@@ -157,15 +157,15 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className={`text-2xl font-bold hover:scale-105 transition-transform duration-300 ${
-                isHeroVisible 
-                  ? 'text-black drop-shadow-lg' 
+                isHeroVisible
+                  ? 'text-black drop-shadow-lg'
                   : 'bg-gradient-hero bg-clip-text text-transparent'
               }`}
             >
-              FutureForge
+              <img src="/favicon.svg" alt="FutureForge Logo" className="h-8 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -275,15 +275,15 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className={`text-2xl font-bold hover:scale-105 transition-transform duration-300 ${
-              isHeroVisible 
-                ? 'text-black drop-shadow-lg' 
+              isHeroVisible
+                ? 'text-black drop-shadow-lg'
                 : 'bg-gradient-hero bg-clip-text text-transparent'
             }`}
           >
-            FutureForge
+            <img src="/favicon.svg" alt="FutureForge Logo" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
