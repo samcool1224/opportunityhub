@@ -165,7 +165,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                   : 'bg-gradient-hero bg-clip-text text-transparent'
               }`}
             >
-              <img src="/favicon.svg" alt="FutureForge Logo" className="h-8 w-auto" />
+              <img src="/Future Forge.png" alt="FutureForge Logo" className="h-8 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -283,7 +283,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                 : 'bg-gradient-hero bg-clip-text text-transparent'
             }`}
           >
-            <img src="/favicon.svg" alt="FutureForge Logo" className="h-8 w-auto" />
+            <img src="/Future Forge.png" alt="FutureForge Logo" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
