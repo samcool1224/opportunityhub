@@ -16,10 +16,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 210 10% 10%;
 
-    /* Primary Orange System - Enhanced */
-    --primary: 16 100% 50%; /* #FF4500 - Deep Primary Orange */
-    --primary-light: 17 100% 60%; /* #FF6B35 - Rich Secondary Orange */
-    --primary-lighter: 18 100% 70%; /* #FF8A65 */
+    /* Primary Orange System - Updated */
+    --primary: 40 100% 50%; /* #FFA800 - Brand Orange */
+    --primary-light: 40 100% 60%;
+    --primary-lighter: 40 100% 70%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 17 100% 70%;
@@ -28,7 +28,8 @@
     --muted: 210 11% 96%;
     --muted-foreground: 210 6% 42%;
 
-    --accent: 140 86% 40%;
+    /* Secondary Accent (Purple) */
+    --accent: 272 97% 75%; /* #C382FD */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -36,7 +37,7 @@
 
     --border: 210 11% 91%;
     --input: 210 11% 91%;
-    --ring: 16 100% 50%;
+    --ring: 40 100% 50%;
 
     --radius: 0.75rem;
 
@@ -45,20 +46,20 @@
     --golden: 45 100% 50%; /* #FFC107 - Golden Yellow */
     --emerald: 142 76% 36%; /* #4CAF50 - Emerald Green */
     --royal: 217 91% 60%; /* #2196F3 - Royal Blue */
-    --purple: 291 64% 42%; /* #9C27B0 - Deep Purple */
+    --purple: 272 97% 75%; /* #C382FD - Brand Purple */
     --magenta: 340 82% 52%; /* #E91E63 - Magenta Pink */
 
     /* Gradient Definitions - Enhanced */
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
-    --gradient-subtle: linear-gradient(135deg, hsl(var(--background)), hsl(16 100% 50% / 0.05));
-    --gradient-section: linear-gradient(180deg, hsl(16 100% 50% / 0.03), hsl(16 100% 50% / 0.08));
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.9), hsl(16 100% 50% / 0.03));
+    --gradient-subtle: linear-gradient(135deg, hsl(var(--background)), hsl(40 100% 50% / 0.05));
+    --gradient-section: linear-gradient(180deg, hsl(40 100% 50% / 0.03), hsl(40 100% 50% / 0.08));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.9), hsl(40 100% 50% / 0.03));
     --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.8), hsl(0 0% 100% / 0.6));
 
     /* Enhanced Glass Effects */
     --glass-bg: 0 0% 100% / 0.8;
     --glass-border: 0 0% 100% / 0.4;
-    --glass-shadow: 0 8px 32px 0 hsl(16 100% 50% / 0.1);
+    --glass-shadow: 0 8px 32px 0 hsl(40 100% 50% / 0.1);
 
     /* Animations */
     --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -84,9 +85,9 @@
     --popover: 210 10% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 16 100% 60%;
-    --primary-light: 17 100% 70%;
-    --primary-lighter: 18 100% 80%;
+    --primary: 40 100% 60%;
+    --primary-light: 40 100% 70%;
+    --primary-lighter: 40 100% 80%;
     --primary-foreground: 210 10% 8%;
 
     --secondary: 17 100% 80%;
@@ -95,7 +96,7 @@
     --muted: 210 10% 15%;
     --muted-foreground: 210 6% 60%;
 
-    --accent: 140 86% 50%;
+    --accent: 272 97% 75%;
     --accent-foreground: 210 10% 8%;
 
     --destructive: 0 84% 70%;
@@ -103,17 +104,17 @@
 
     --border: 210 10% 20%;
     --input: 210 10% 20%;
-    --ring: 16 100% 60%;
+    --ring: 40 100% 60%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(16 100% 60%), hsl(17 100% 70%));
-    --gradient-subtle: linear-gradient(135deg, hsl(210 10% 8%), hsl(16 100% 60% / 0.1));
-    --gradient-section: linear-gradient(180deg, hsl(16 100% 60% / 0.05), hsl(16 100% 60% / 0.1));
-    --gradient-card: linear-gradient(135deg, hsl(210 10% 10% / 0.9), hsl(16 100% 60% / 0.05));
+    --gradient-hero: linear-gradient(135deg, hsl(40 100% 60%), hsl(40 100% 70%));
+    --gradient-subtle: linear-gradient(135deg, hsl(210 10% 8%), hsl(40 100% 60% / 0.1));
+    --gradient-section: linear-gradient(180deg, hsl(40 100% 60% / 0.05), hsl(40 100% 60% / 0.1));
+    --gradient-card: linear-gradient(135deg, hsl(210 10% 10% / 0.9), hsl(40 100% 60% / 0.05));
     --gradient-glass: linear-gradient(135deg, hsl(210 10% 10% / 0.8), hsl(210 10% 10% / 0.6));
 
     --glass-bg: 210 10% 10% / 0.8;
     --glass-border: 210 10% 10% / 0.4;
-    --glass-shadow: 0 8px 32px 0 hsl(16 100% 60% / 0.2);
+    --glass-shadow: 0 8px 32px 0 hsl(40 100% 60% / 0.2);
   }
 }
 
@@ -132,12 +133,12 @@
   .hero-glass-bg {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, 
-      hsl(16 100% 50% / 0.1) 0%, 
-      hsl(17 100% 60% / 0.08) 25%, 
-      hsl(291 64% 42% / 0.06) 50%, 
-      hsl(217 91% 60% / 0.08) 75%, 
-      hsl(16 100% 50% / 0.1) 100%
+    background: linear-gradient(135deg,
+      hsl(40 100% 50% / 0.10) 0%,
+      hsl(40 100% 60% / 0.08) 25%,
+      hsl(272 97% 75% / 0.06) 50%,
+      hsl(217 91% 60% / 0.08) 75%,
+      hsl(40 100% 50% / 0.10) 100%
     );
     margin-top: -64px; /* Extend above the navigation */
     padding-top: 64px; /* Add padding to account for navigation height */
@@ -161,7 +162,7 @@
   }
 
   .glass-panel-orange {
-    background: radial-gradient(ellipse at center, rgba(255, 69, 0, 0.4) 0%, rgba(255, 69, 0, 0.2) 50%, rgba(255, 69, 0, 0.05) 100%);
+    background: radial-gradient(ellipse at center, rgba(255, 168, 0, 0.40) 0%, rgba(255, 168, 0, 0.20) 50%, rgba(255, 168, 0, 0.05) 100%);
   }
 
   .glass-panel-coral {
@@ -315,7 +316,7 @@
   }
 
   .hero-glow {
-    filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.3));
+    filter: drop-shadow(0 0 16px rgba(255, 168, 0, 0.28)) drop-shadow(0 0 8px rgba(195, 130, 253, 0.18));
   }
 
   /* Glass Effects */
@@ -351,7 +352,13 @@
   .btn-hero {
     @apply bg-gradient-hero text-primary-foreground rounded-full px-8 py-4 font-semibold;
     @apply shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
-    @apply hover:shadow-orange-500/25;
+  }
+  .btn-hero:hover {
+    /* Add subtle purple glow in addition to orange */
+    box-shadow:
+      0 10px 20px rgba(0,0,0,0.10),
+      0 0 24px hsla(40, 100%, 50%, 0.25),
+      0 0 16px rgba(195, 130, 253, 0.18);
   }
 
   .btn-outline-hero {
@@ -365,13 +372,21 @@
     @apply bg-gradient-card backdrop-blur-sm rounded-xl p-6;
     @apply border border-white/20 shadow-lg hover:shadow-xl;
     @apply transform hover:-translate-y-1 transition-all duration-300;
-    @apply hover:shadow-orange-500/10;
+  }
+  .card-enhanced:hover { box-shadow:
+      0 8px 24px rgba(0,0,0,0.06),
+      0 0 20px hsla(40, 100%, 50%, 0.12),
+      0 0 12px rgba(195, 130, 253, 0.10);
   }
 
   .card-glass {
     @apply glass rounded-xl p-6;
     @apply transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300;
-    @apply hover:shadow-orange-500/15;
+  }
+  .card-glass:hover { box-shadow:
+      0 12px 36px rgba(0,0,0,0.10),
+      0 0 24px hsla(40, 100%, 50%, 0.15),
+      0 0 16px rgba(195, 130, 253, 0.12);
   }
 
   /* Navigation Enhancements */
@@ -398,14 +413,14 @@
     position: fixed;
     width: 18px;
     height: 18px;
-    background: radial-gradient(circle, hsl(35 100% 50% / 0.9) 0%, hsl(30 100% 45% / 0.9) 55%, hsl(25 100% 40% / 0.0) 70%);
+    background: radial-gradient(circle, hsl(40 100% 50% / 0.9) 0%, hsl(40 100% 45% / 0.9) 55%, hsl(35 100% 40% / 0.0) 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     /* Remove blend mode so it never inverts/turns white */
     mix-blend-mode: normal;
     filter: blur(0.5px);
-    box-shadow: 0 0 8px hsl(30 100% 45% / 0.75), 0 0 18px hsl(25 100% 40% / 0.5);
+    box-shadow: 0 0 8px hsl(40 100% 45% / 0.75), 0 0 18px hsl(35 100% 40% / 0.5), 0 0 20px rgba(195, 130, 253, 0.25);
   }
   
   /* Ensure all interactive elements use the custom cursor */
@@ -438,8 +453,13 @@
   .input-enhanced {
     @apply w-full px-4 py-3 rounded-xl border border-border bg-card;
     @apply focus:ring-2 focus:ring-primary focus:border-primary;
-    @apply focus:shadow-lg focus:shadow-orange-500/20;
+    @apply focus:shadow-lg;
     @apply transition-all duration-300;
+  }
+  .input-enhanced:focus { box-shadow:
+      0 8px 24px rgba(0,0,0,0.06),
+      0 0 0 6px hsla(40, 100%, 50%, 0.10),
+      0 0 0 10px rgba(195, 130, 253, 0.06);
   }
 
   /* Enhanced Glass Animations */
@@ -518,15 +538,16 @@
   /* Premium Shadows */
   .shadow-premium {
     box-shadow:
-      0 4px 16px -4px hsl(16 100% 59% / 0.1),
-      0 8px 32px -8px hsl(16 100% 59% / 0.05),
-      0 16px 64px -16px hsl(16 100% 59% / 0.03);
+      0 4px 16px -4px hsl(40 100% 59% / 0.10),
+      0 8px 32px -8px hsl(40 100% 59% / 0.05),
+      0 16px 64px -16px hsl(40 100% 59% / 0.03);
   }
 
   .shadow-premium-hover:hover {
     box-shadow:
-      0 8px 32px -4px hsl(16 100% 59% / 0.15),
-      0 16px 64px -8px hsl(16 100% 59% / 0.1),
-      0 32px 128px -16px hsl(16 100% 59% / 0.05);
+      0 8px 32px -4px hsl(40 100% 59% / 0.15),
+      0 16px 64px -8px hsl(40 100% 59% / 0.10),
+      0 32px 128px -16px hsl(40 100% 59% / 0.05),
+      0 0 24px rgba(195, 130, 253, 0.10);
   }
 }

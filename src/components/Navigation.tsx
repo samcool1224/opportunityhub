@@ -175,7 +175,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                   key={link.path}
                   to={link.path}
                   className={`nav-link ${isActive(link.path) ? 'active' : ''} ${
-                    isHeroVisible ? 'text-black hover:text-orange-600' : ''
+                    isHeroVisible ? 'text-black hover:text-[#FFA800]' : ''
                   }`}
                 >
                   {link.name}
@@ -211,7 +211,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                 size="sm"
                 onClick={() => setIsOpen(!isOpen)}
                 className={`rounded-full h-10 w-10 p-0 ${
-                  isHeroVisible ? 'text-black hover:text-orange-600' : ''
+                  isHeroVisible ? 'text-black hover:text-[#FFA800]' : ''
                 }`}
               >
                 {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -233,7 +233,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                   className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${
                     isActive(link.path)
                       ? isHeroVisible ? 'text-black bg-black/10' : 'text-primary bg-primary/10'
-                      : isHeroVisible ? 'text-black hover:text-orange-600 hover:bg-black/5' : 'text-foreground hover:text-primary hover:bg-primary/5'
+                      : isHeroVisible ? 'text-black hover:text-[#FFA800] hover:bg-black/5' : 'text-foreground hover:text-primary hover:bg-primary/5'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
@@ -245,7 +245,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                 <Link
                   to="/login"
                   className={`block px-3 py-2 rounded-lg text-base font-medium ${
-                    isHeroVisible ? 'text-black hover:text-orange-600 hover:bg-black/5' : 'text-foreground hover:text-primary hover:bg-primary/5'
+                    isHeroVisible ? 'text-black hover:text-[#FFA800] hover:bg-black/5' : 'text-foreground hover:text-primary hover:bg-primary/5'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
@@ -293,7 +293,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                 key={link.path}
                 to={link.path}
                 className={`nav-link ${isActive(link.path) ? 'active' : ''} ${
-                  isHeroVisible ? 'text-black hover:text-orange-600' : ''
+                  isHeroVisible ? 'text-black hover:text-[#FFA800]' : ''
                 }`}
               >
                 {link.name}
@@ -314,7 +314,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                       variant="ghost"
                       size="sm"
                       className={`rounded-full h-10 w-10 p-0 relative ${
-                        isHeroVisible ? 'text-black hover:text-orange-600' : ''
+                        isHeroVisible ? 'text-black hover:text-[#FFA800]' : ''
                       }`}
                     >
                       <Bell className="h-4 w-4" />
@@ -398,7 +398,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
                       variant="ghost" 
                       size="sm"
                       className={`rounded-full h-10 w-10 p-0 glass ${
-                        isHeroVisible ? 'text-black hover:text-orange-600' : ''
+                        isHeroVisible ? 'text-black hover:text-[#FFA800]' : ''
                       }`}
                     >
                       {user.avatar ? (
@@ -472,7 +472,7 @@ export const Navigation = ({ user: propUser }: NavigationProps) => {
               size="sm"
               onClick={() => setIsOpen(!isOpen)}
               className={`rounded-full h-10 w-10 p-0 ${
-                isHeroVisible ? 'text-black hover:text-orange-600' : ''
+                isHeroVisible ? 'text-black hover:text-[#FFA800]' : ''
               }`}
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
