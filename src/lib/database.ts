@@ -213,6 +213,14 @@ export interface OpportunityData {
   opportunity_link?: string
   app_link?: string
   created_at?: string
+  professors?: {
+    id?: string
+    first_name?: string
+    last_name?: string
+    institution?: string
+    department?: string
+    bio?: string
+  }
 }
 
 export const createOpportunity = async (opportunity: OpportunityData) => {
@@ -271,6 +279,7 @@ export interface ApplicationData {
   professor_id: string
   status?: 'submitted' | 'under_review' | 'accepted' | 'rejected'
   message?: string
+  portfolio_url?: string
   created_at?: string
   updated_at?: string
 }

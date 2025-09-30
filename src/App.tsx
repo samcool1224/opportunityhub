@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Opportunities from "./pages/Opportunities";
+import PostOpportunity from "./pages/PostOpportunity";
 import StudentRegistration from "./pages/StudentRegistration";
 import ProfessorRegistration from "./pages/ProfessorRegistration";
 import OrganizationRegistration from "./pages/OrganizationRegistration";
@@ -105,6 +106,7 @@ const App = () => (
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/applications" element={<Applications />} />
               <Route path="/opportunities" element={<Opportunities />} />
+              <Route path="/opportunities/post" element={<PostOpportunity />} />
               <Route path="/register/student" element={<StudentRegistration />} />
               <Route path="/register/organization" element={<OrganizationRegistration />} />
               <Route path="/register/professor" element={<OrganizationRegistration />} />

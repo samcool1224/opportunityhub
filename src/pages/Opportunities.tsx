@@ -6,7 +6,8 @@ import { EnhancedButton } from '@/components/EnhancedButton';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { 
   Search, 
   Filter, 
@@ -20,9 +21,14 @@ import {
   Download,
   AlertTriangle,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Sparkles,
+  PlusCircle,
+  X,
+  ExternalLink,
+  Briefcase
 } from 'lucide-react';
-import { getAllOpportunities, createOpportunity, applyToOpportunity, getStudentApplications, getDailyApplicationCount } from '@/lib/database';
+import { getAllOpportunities, applyToOpportunity, getStudentApplications, getDailyApplicationCount } from '@/lib/database';
 import { useAuth } from '@/contexts/AuthContext';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react';
@@ -31,27 +37,17 @@ import { OpportunityData, ApplicationData } from '@/lib/database';
 
 const Opportunities = () => {
   const { user: authUser } = useAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [opportunities, setOpportunities] = useState<OpportunityData[]>([]);
   const [error, setError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [newOpp, setNewOpp] = useState({
-    title: '',
-    description: '',
-    tags: '',
-    location: '',
-    duration: '',
-    compensation: '',
-    type: 'Remote' as 'Remote' | 'On-site' | 'Hybrid',
-    application_deadline: '',
-    applicant_cap: '',
-    opportunity_link: '',
-    app_link: ''
-  });
   const [applications, setApplications] = useState<ApplicationData[]>([]);
   const [dailyApplicationCount, setDailyApplicationCount] = useState(0);
   const [visibleOpportunities, setVisibleOpportunities] = useState(5);
   const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: string]: boolean }>({});
+  const [selectedOpportunity, setSelectedOpportunity] = useState<OpportunityData | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleDescription = (opportunityId: string) => {
     setExpandedDescriptions(prev => ({
@@ -257,122 +253,41 @@ const Opportunities = () => {
           </div>
         </section>
 
-        {/* Organization Post Opportunity Section */}
+        {/* Organization Post Opportunity CTA */}
         {authUser?.user_metadata?.role === 'professor' && (
           <section className="pt-20 pb-12 bg-gradient-subtle">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <EnhancedCard variant="glass" className="p-6">
-                <h2 className="text-2xl font-bold text-foreground mb-6">Post a New Opportunity (Organizations)</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <Input
-                    placeholder="Opportunity Title"
-                    value={newOpp.title}
-                    onChange={(e) => setNewOpp({...newOpp, title: e.target.value})}
-                  />
-                  <Input
-                    placeholder="Location"
-                    value={newOpp.location}
-                    onChange={(e) => setNewOpp({...newOpp, location: e.target.value})}
-                  />
-                  <Input
-                    placeholder="Duration (e.g., 3 months, 1 year)"
-                    value={newOpp.duration}
-                    onChange={(e) => setNewOpp({...newOpp, duration: e.target.value})}
-                  />
-                  <Input
-                    placeholder="Compensation (e.g., $15/hour, $5000 stipend)"
-                    value={newOpp.compensation}
-                    onChange={(e) => setNewOpp({...newOpp, compensation: e.target.value})}
-                  />
-                  <Select value={newOpp.type} onValueChange={(value) => setNewOpp({...newOpp, type: value})}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Remote">Remote</SelectItem>
-                      <SelectItem value="On-site">On-site</SelectItem>
-                      <SelectItem value="Hybrid">Hybrid</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Input
-                    type="date"
-                    placeholder="Application Deadline"
-                    value={newOpp.application_deadline}
-                    onChange={(e) => setNewOpp({...newOpp, application_deadline: e.target.value})}
-                  />
-                  <Input
-                    type="number"
-                    placeholder="Applicant Cap (0 for no cap)"
-                    value={newOpp.applicant_cap}
-                    onChange={(e) => setNewOpp({...newOpp, applicant_cap: e.target.value})}
-                  />
-                  <Input
-                    placeholder="Optional: Link to external application or details"
-                    value={newOpp.opportunity_link}
-                    onChange={(e) => setNewOpp({...newOpp, opportunity_link: e.target.value})}
-                  />
-                </div>
-                <div className="mb-6">
-                  <Input
-                    placeholder="Tags (comma-separated: AI, Machine Learning, Python)"
-                    value={newOpp.tags}
-                    onChange={(e) => setNewOpp({...newOpp, tags: e.target.value})}
-                  />
-                </div>
-                <div className="mb-6">
-                  <textarea
-                    placeholder="Detailed description of the opportunity, requirements, and what students will learn..."
-                    value={newOpp.description}
-                    onChange={(e) => setNewOpp({...newOpp, description: e.target.value})}
-                    className="w-full p-3 border border-border rounded-lg bg-background text-foreground resize-none h-32"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <Input
-                    placeholder="External Details Link (optional)"
-                    value={newOpp.opportunity_link}
-                    onChange={(e) => setNewOpp({...newOpp, opportunity_link: e.target.value})}
-                  />
-                  <Input
-                    placeholder="Application Link (direct URL for Apply Now)"
-                    value={newOpp.app_link}
-                    onChange={(e) => setNewOpp({...newOpp, app_link: e.target.value})}
-                  />
-                </div>
-                <div className="flex justify-end">
+              <EnhancedCard 
+                variant="glass" 
+                className="p-8 cursor-pointer hover:scale-[1.02] transition-transform duration-300 bg-gradient-to-br from-primary/10 via-purple-500/10 to-orange-500/10"
+                onClick={() => navigate('/opportunities/post')}
+              >
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="flex items-center space-x-6">
+                    <div className="w-20 h-20 rounded-full bg-gradient-hero flex items-center justify-center animate-pulse">
+                      <PlusCircle className="w-10 h-10 text-white" />
+                    </div>
+                    <div className="text-left">
+                      <h2 className="text-3xl font-bold text-foreground mb-2 flex items-center">
+                        Post an Opportunity
+                        <Sparkles className="w-6 h-6 ml-2 text-primary animate-bounce" />
+                      </h2>
+                      <p className="text-lg text-muted-foreground">
+                        Share amazing internships, research positions, and more with talented students!
+                      </p>
+                    </div>
+                  </div>
                   <EnhancedButton 
                     variant="hero"
-                    onClick={async () => {
-                      if (!authUser) return;
-                      if (!newOpp.title || !newOpp.description) {
-                        setError('Please fill in all required fields');
-                        return;
-                      }
-                      const { error } = await createOpportunity({
-                        professor_id: authUser.id,
-                        title: newOpp.title,
-                        description: newOpp.description,
-                        tags: newOpp.tags.split(',').map(t => t.trim()).filter(Boolean),
-                        location: newOpp.location,
-                        duration: newOpp.duration,
-                        compensation: newOpp.compensation,
-                        type: newOpp.type,
-                        application_deadline: newOpp.application_deadline || undefined,
-                        applicants: 0,
-                        applicant_cap: newOpp.applicant_cap ? parseInt(newOpp.applicant_cap, 10) : 0,
-                        opportunity_link: newOpp.opportunity_link || undefined,
-                        app_link: newOpp.app_link || undefined,
-                      });
-                      if (error) {
-                        setError('Failed to create opportunity');
-                      } else {
-                        setNewOpp({ title: '', description: '', tags: '', location: '', duration: '', compensation: '', type: 'Remote', application_deadline: '', applicant_cap: '', opportunity_link: '', app_link: '' });
-                        const { data } = await getAllOpportunities();
-                        setOpportunities(data || []);
-                      }
+                    size="lg"
+                    className="min-w-[200px]"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate('/opportunities/post');
                     }}
                   >
-                    Post Opportunity
+                    <PlusCircle className="w-5 h-5 mr-2" />
+                    Create Opportunity
                   </EnhancedButton>
                 </div>
               </EnhancedCard>
@@ -413,13 +328,26 @@ const Opportunities = () => {
                   className="p-6 fade-in-up"
                   style={{animationDelay: `${index * 0.1}s`}}
                 >
-                  <div className="flex flex-col lg:flex-row gap-6">
+                  <div 
+                    className="flex flex-col lg:flex-row gap-6 cursor-pointer"
+                    onClick={() => {
+                      if (authUser?.user_metadata?.role === 'student') {
+                        setSelectedOpportunity(opportunity);
+                        setIsModalOpen(true);
+                      }
+                    }}
+                  >
                     {/* Organization Info */}
                     <div className="flex flex-col items-start space-y-4">
                       <div className="flex items-center space-x-4">
-                        <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-                          {(opportunity.professors?.first_name?.[0] || opportunity.professors?.institution?.[0] || 'O')}
-                        </div>
+                        <img 
+                          src="/default_pfp.png" 
+                          alt="Organization" 
+                          className="w-16 h-16 rounded-full object-cover border-2 border-primary/20"
+                          onError={(e) => {
+                            e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" fill="%23ddd"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="%23999"%3EO%3C/text%3E%3C/svg%3E';
+                          }}
+                        />
                         <div>
                           <h3 className="font-semibold text-foreground">
                             {opportunity.professors?.institution || 'Organization'}
@@ -562,7 +490,7 @@ const Opportunities = () => {
                             <>
                               {/* Portfolio Download Link for Applied Students */}
                               {applications.some(app => app.opportunity_id === opportunity.id) && (
-                                <div className="flex items-center">
+                                <div className="flex items-center" onClick={(e) => e.stopPropagation()}>
                                   <a 
                                     href={applications.find(app => app.opportunity_id === opportunity.id)?.portfolio_url} 
                                     target="_blank" 
@@ -576,7 +504,7 @@ const Opportunities = () => {
                               )}
                               
                               {opportunity.app_link ? (
-                                <EnhancedButton variant="hero" size="sm">
+                                <EnhancedButton variant="hero" size="sm" onClick={(e) => e.stopPropagation()}>
                                   <a href={formatUrl(opportunity.app_link)} target="_blank" rel="noopener noreferrer">
                                     Apply Now
                                   </a>
@@ -590,7 +518,8 @@ const Opportunities = () => {
                                   }
                                   size="sm" 
                                   disabled={getApplicationStatus(opportunity) !== 'can_apply'}
-                                  onClick={() => {
+                                  onClick={(e) => {
+                                    e.stopPropagation();
                                     setError('');
                                     const professorId = opportunity.professor_id || opportunity.professors?.id;
                                     if (!authUser || !professorId) return;
@@ -665,6 +594,201 @@ const Opportunities = () => {
             </div>
           </div>
         </section>
+
+        {/* Opportunity Details Modal */}
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent className="max-w-5xl w-[70vw] max-h-[85vh] overflow-y-auto">
+            {selectedOpportunity && (
+              <>
+                <DialogHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <DialogTitle className="text-3xl font-bold mb-2">
+                        {selectedOpportunity.title}
+                      </DialogTitle>
+                      <div className="flex items-center space-x-4 mt-4">
+                        <img 
+                          src="/default_pfp.png" 
+                          alt="Organization" 
+                          className="w-12 h-12 rounded-full object-cover border-2 border-primary/20"
+                          onError={(e) => {
+                            e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"%3E%3Crect width="48" height="48" fill="%23ddd"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="%23999"%3EO%3C/text%3E%3C/svg%3E';
+                          }}
+                        />
+                        <div>
+                          <h3 className="font-semibold text-lg">
+                            {selectedOpportunity.professors?.institution || 'Organization'}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            {selectedOpportunity.professors?.department || 'Department not specified'}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <Badge 
+                      variant={selectedOpportunity.status === 'Open' ? 'default' : 'secondary'}
+                      className="text-base px-4 py-1"
+                    >
+                      {selectedOpportunity.status}
+                    </Badge>
+                  </div>
+                </DialogHeader>
+
+                <div className="space-y-6 mt-6">
+                  {/* Description */}
+                  <div>
+                    <h4 className="text-lg font-semibold mb-2 flex items-center">
+                      <Briefcase className="w-5 h-5 mr-2 text-primary" />
+                      Description
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedOpportunity.description}
+                    </p>
+                  </div>
+
+                  {/* Tags */}
+                  {selectedOpportunity.tags && selectedOpportunity.tags.length > 0 && (
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3">Skills & Tags</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedOpportunity.tags.map((tag: string, index: number) => (
+                          <Badge key={index} variant="secondary" className="text-sm px-3 py-1">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Key Details Grid */}
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3">Key Details</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
+                        <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">Location</p>
+                          <p className="text-muted-foreground">{selectedOpportunity.location || 'Not specified'}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
+                        <Clock className="h-5 w-5 text-primary mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">Duration</p>
+                          <p className="text-muted-foreground">{selectedOpportunity.duration || 'Not specified'}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
+                        <DollarSign className="h-5 w-5 text-primary mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">Compensation</p>
+                          <p className="text-muted-foreground">{selectedOpportunity.compensation || 'Not specified'}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
+                        <Building className="h-5 w-5 text-primary mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">Type</p>
+                          <p className="text-muted-foreground">{selectedOpportunity.type || 'Not specified'}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
+                        <Calendar className="h-5 w-5 text-primary mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">Deadline</p>
+                          <p className="text-muted-foreground">
+                            {selectedOpportunity.application_deadline 
+                              ? new Date(selectedOpportunity.application_deadline).toLocaleDateString()
+                              : 'No deadline'}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-3 p-3 rounded-lg bg-muted/30">
+                        <Users className="h-5 w-5 text-primary mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">Applicants</p>
+                          <p className="text-muted-foreground">
+                            {selectedOpportunity.applicants ?? 0}
+                            {selectedOpportunity.applicant_cap && selectedOpportunity.applicant_cap > 0 
+                              ? ` / ${selectedOpportunity.applicant_cap}` 
+                              : ''}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Organization Bio */}
+                  {selectedOpportunity.professors?.bio && (
+                    <div>
+                      <h4 className="text-lg font-semibold mb-2">About the Organization</h4>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {selectedOpportunity.professors.bio}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* External Links */}
+                  {selectedOpportunity.opportunity_link && (
+                    <div>
+                      <h4 className="text-lg font-semibold mb-2">Additional Information</h4>
+                      <a 
+                        href={formatUrl(selectedOpportunity.opportunity_link)} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        View Full Details
+                      </a>
+                    </div>
+                  )}
+
+                  {/* Action Buttons */}
+                  <div className="flex justify-end space-x-3 pt-4 border-t border-border">
+                    <EnhancedButton 
+                      variant="outline-hero"
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      Close
+                    </EnhancedButton>
+                    
+                    {selectedOpportunity.app_link ? (
+                      <EnhancedButton variant="hero" size="lg">
+                        <a href={formatUrl(selectedOpportunity.app_link)} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                          Apply Now
+                          <ExternalLink className="w-4 h-4 ml-2" />
+                        </a>
+                      </EnhancedButton>
+                    ) : (
+                      <EnhancedButton 
+                        variant={
+                          getApplicationStatus(selectedOpportunity) === 'applied' ? 'outline-hero' :
+                          getApplicationStatus(selectedOpportunity) === 'cap_reached' ? 'glass' :
+                          'hero'
+                        }
+                        size="lg"
+                        disabled={getApplicationStatus(selectedOpportunity) !== 'can_apply'}
+                        onClick={() => {
+                          setError('');
+                          const professorId = selectedOpportunity.professor_id || selectedOpportunity.professors?.id;
+                          if (!authUser || !professorId) return;
+                          handleApply(selectedOpportunity.id, professorId);
+                          setIsModalOpen(false);
+                        }}
+                      >
+                        {getApplicationStatus(selectedOpportunity) === 'applied' ? 'Already Applied' : 
+                         getApplicationStatus(selectedOpportunity) === 'cap_reached' ? 'Cap Reached' :
+                         getApplicationStatus(selectedOpportunity) === 'daily_limit_reached' ? 'Daily Limit Reached' :
+                         'Apply Now'}
+                      </EnhancedButton>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
       </Layout>
     </ProtectedRoute>
   );

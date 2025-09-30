@@ -31,11 +31,11 @@ interface NavigationProps {
 }
 
 interface Notification {
-  id: string;
+  id?: string;
   title: string;
-  body: string;
-  created_at: string;
-  read_at: string | null;
+  body?: string;
+  created_at?: string;
+  read_at?: string | null;
 }
 
 export const Navigation = ({ user: propUser }: NavigationProps) => {
